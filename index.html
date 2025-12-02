@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Armughan Custom Start Page</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Tab</title>
 
-<style>
-    body {
+    <style>
+      body {
         margin: 0;
         padding: 0;
         background: #031d12; /* clean dark-green hacker tone */
@@ -19,54 +19,103 @@
         height: 100vh;
         overflow: hidden;
         position: relative;
-    }
+      }
 
-    /* TOP-RIGHT TEXT SHORTCUTS */
-    .top-right {
+      /* TOP-RIGHT TEXT SHORTCUTS */
+      .top-right {
         position: absolute;
-        top: 18px;
+        top: 16px;
         right: 25px;
         display: flex;
-        gap: 22px;
+        gap: 20px;
         font-size: 16px;
         z-index: 20;
-    }
+      }
 
-    .top-right a {
+      .top-right a {
         color: #00ff62;
         text-decoration: none;
         font-weight: bold;
-        transition: 0.2s;
-    }
+        position: relative;
+        padding-bottom: 2px; /* gap between text & underline */
+      }
 
-    .top-right a:hover {
-        text-shadow: 0 0 10px #00ff62;
-        transform: scale(1.1);
-    }
+      .top-right a:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0; /* underline stays below text */
+        width: 100%;
+        height: 1px; /* underline thickness */
+        background: #00ff62;
+        box-shadow: 0 0 8px #00ff62; /* neon glow */
+        transition: all 0.3s ease-in-out;
+      }
 
-    /* Logo */
-    .logo {
+      /* TOP LEFT CAPSULE BUTTON */
+      .top-left {
+        position: absolute;
+        top: 18px;
+        left: 22px;
+        z-index: 10;
+      }
+
+      .top-left a {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+
+        background: #0b1f16;
+        border: 1px solid #113523;
+        border-radius: 55px;
+
+        padding: 6px 40px 6px 10px; /* wider capsule */
+        color: #00ff62;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 17px; /* slightly larger text */
+
+        box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
+        transition: 0.25s ease;
+      }
+
+      .top-left a:hover {
+        background: #00ff62;
+        color: #000;
+        box-shadow: 0 0 25px #00ff62;
+        transform: translateY(-2px);
+      }
+
+      .top-left img {
+        width: 38px; /* bigger round image */
+        height: 38px; /* bigger round image */
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      /* Logo */
+      .logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         color: #00ff62;
-        text-shadow: 0 0 15px #00ff62, 0 0 35px #00ff62;
-        gap: 10px;
-    }
+        text-shadow: 0 0 10px #00ff62, 0 0 35px #00ff62;
+        gap: 20px;
+      }
 
-    .logo span:first-child {
-        font-size: 60px;
+      .logo span:first-child {
+        font-size: 65px;
         font-weight: bold;
-    }
+      }
 
-    .logo span:last-child {
-        font-size: 48px;
+      .logo span:last-child {
+        font-size: 54px;
         font-weight: bold;
-    }
+      }
 
-    /* Search bar */
-    .search-box {
+      /* Search bar */
+      .search-box {
         margin-top: 40px;
         width: 550px;
         max-width: 90%;
@@ -78,22 +127,22 @@
         color: #d4ffd4;
         font-size: 18px;
         box-shadow: 0 0 15px rgba(0, 255, 100, 0.25);
-        transition: .3s ease;
-    }
+        transition: 0.3s ease;
+      }
 
-    .search-box:focus {
+      .search-box:focus {
         border-color: #00ff62;
         box-shadow: 0 0 25px rgba(0, 255, 100, 0.45);
-    }
+      }
 
-    /* Shortcuts */
-    .shortcuts {
+      /* Shortcuts */
+      .shortcuts {
         display: flex;
         gap: 22px;
         margin-top: 35px;
-    }
+      }
 
-    .shortcuts a {
+      .shortcuts a {
         text-decoration: none;
         padding: 10px 20px;
         border-radius: 10px;
@@ -103,51 +152,65 @@
         font-size: 16px;
         box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
         transition: 0.3s;
-    }
+      }
 
-    .shortcuts a:hover {
+      .shortcuts a:hover {
         background: #00ff62;
         color: #000;
         transform: translateY(-3px);
         box-shadow: 0 0 25px #00ff62;
-    }
+      }
 
-    .small-text {
+      .small-text {
         margin-top: 20px;
         opacity: 0.45;
         font-size: 14px;
-    }
-</style>
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TOP RIGHT TEXT LINKS -->
+    <div class="top-right">
+      <a href="https://mail.google.com" target="_blank">Gmail</a>
+      <a href="https://photos.google.com" target="_blank">Photos</a>
+    </div>
 
-</head>
-<body>
+    <div class="top-left">
+      <a href="https://armughankhan.pythonanywhere.com/" target="_blank">
+        <img src="images/portfolio.png" alt="Portfolio Icon" />
+        <span>Portfolio</span>
+      </a>
+    </div>
 
-<!-- TOP RIGHT TEXT LINKS -->
-<div class="top-right">
-    <a href="https://mail.google.com" target="_blank">Gmail</a>
-    <a href="https://photos.google.com" target="_blank">Photos</a>
-</div>
+    <!-- Logo -->
+    <div class="logo">
+      <span>&lt;/&gt;</span>
+      <span>Armughan.git</span>
+    </div>
 
-<!-- Logo -->
-<div class="logo">
-    <span>&lt;/&gt;</span>
-    <span>Armughan.git</span>
-</div>
+    <!-- Search -->
+    <form action="https://www.google.com/search" method="GET">
+      <input
+        class="search-box"
+        type="text"
+        name="q"
+        placeholder="Search the internet..."
+        autocomplete="off"
+      />
+    </form>
 
-<!-- Search -->
-<form action="https://www.google.com/search" method="GET">
-    <input class="search-box" type="text" name="q" placeholder="Search the internet..." autocomplete="off" />
-</form>
+    <!-- Buttons -->
+    <div class="shortcuts">
+      <a href="https://youtube.com" target="_blank">YouTube</a>
+      <a href="https://instagram.com/khanarmughan.git" target="_blank"
+        >Instagram</a
+      >
+      <a href="https://github.com/khanarmughan71-dev" target="_blank">GitHub</a>
+      <a href="https://salesnest-frontend.vercel.app/" target="_blank"
+        >SalesNest</a
+      >
+    </div>
 
-<!-- Buttons -->
-<div class="shortcuts">
-    <a href="https://youtube.com" target="_blank">YouTube</a>
-    <a href="https://instagram.com/khanarmughan.git" target="_blank">Instagram</a>
-    <a href="https://github.com/khanarmughan71-dev" target="_blank">GitHub</a>
-    <a href="https://salesnest-frontend.vercel.app/" target="_blank">SalesNest</a>
-</div>
-
-<div class="small-text">@khanarmughan.git - all rights reserved</div>
-
-</body>
+    <div class="small-text">@khanarmughan.git - all rights reserved</div>
+  </body>
 </html>
