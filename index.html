@@ -87,11 +87,13 @@
       }
 
       .top-left img {
-        width: 38px; /* bigger round image */
-        height: 38px; /* bigger round image */
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
-        object-fit: cover;
+        object-fit: cover;  /* ensures perfect cropping */
+        object-position: center;
       }
+
 
       /* Logo */
       .logo {
@@ -214,6 +216,7 @@
     <div class="small-text">@khanarmughan.git - all rights reserved</div>
   </body>
 </html>
+
 
 
 
