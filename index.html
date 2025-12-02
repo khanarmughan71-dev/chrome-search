@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Armughan Custom Start Page</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #050d0a;
+        font-family: "Consolas", "Courier New", monospace;
+        color: #d4ffd4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Background Hacker Matrix Lines */
+    .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url("https://i.imgur.com/3c9ZQYB.png"); 
+        opacity: 0.18;
+        background-size: cover;
+        z-index: -1;
+        animation: fade 6s infinite alternate;
+    }
+
+    @keyframes fade {
+        from { opacity: 0.12; }
+        to { opacity: 0.23; }
+    }
+
+    /* Logo */
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 40px;
+        user-select: none;
+        color: #00ff62;
+        text-shadow: 0 0 15px #00ff62, 0 0 35px #00ff62;
+        gap: 10px;
+    }
+
+    .logo span:first-child {
+        font-size: 60px;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .logo span:last-child {
+        font-size: 48px;
+        font-weight: bold;
+    }
+
+    /* Search bar */
+    .search-box {
+        margin-top: 40px;
+        width: 550px;
+        max-width: 90%;
+        padding: 15px 25px;
+        border-radius: 35px;
+        border: 2px solid #0f3321;
+        background: #0b1f16;
+        outline: none;
+        color: #d4ffd4;
+        font-size: 18px;
+        transition: .3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 100, 0.25);
+    }
+    .search-box:focus {
+        border-color: #00ff62;
+        box-shadow: 0 0 25px rgba(0, 255, 100, 0.45);
+    }
+
+    /* Shortcuts */
+    .shortcuts {
+        display: flex;
+        gap: 22px;
+        margin-top: 35px;
+    }
+
+    .shortcuts a {
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        background: #0b1f16;
+        border: 1px solid #113523;
+        color: #00ff62;
+        font-size: 16px;
+        box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
+        transition: 0.3s;
+    }
+
+    .shortcuts a:hover {
+        background: #00ff62;
+        color: #000;
+        box-shadow: 0 0 25px #00ff62;
+        transform: translateY(-3px);
+    }
+
+    .small-text {
+        margin-top: 20px;
+        opacity: 0.45;
+        font-size: 14px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="bg"></div>
+
+<!-- Custom Logo FIXED -->
+<div class="logo">
+    <span>&lt;/&gt;</span>
+    <span>Armughan.git</span>
+</div>
+
+<!-- Search Form -->
+<form action="https://www.google.com/search" method="GET">
+    <input 
+        class="search-box" 
+        type="text" 
+        name="q" 
+        placeholder="Search the internet..." 
+        autocomplete="off"
+    />
+</form>
+
+<!-- Shortcuts -->
+<div class="shortcuts">
+    <a href="https://youtube.com" target="_blank">YouTube</a>
+    <a href="https://instagram.com/khanarmughan.git" target="_blank">Instagram</a>
+    <a href="https://github.com/khanarmughan71-dev" target="_blank">GitHub</a>
+    <a href="https://salesnest-frontend.vercel.app/" target="_blank">SalesNest</a>
+</div>
+
+<div class="small-text">@khanarmughan.git - all rights reserved</div>
+
+</body>
+</html>
