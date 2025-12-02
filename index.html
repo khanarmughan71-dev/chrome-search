@@ -9,7 +9,7 @@
     body {
         margin: 0;
         padding: 0;
-        background: #050d0a;
+        background: #031d12; /* clean dark-green hacker tone */
         font-family: "Consolas", "Courier New", monospace;
         color: #d4ffd4;
         display: flex;
@@ -18,49 +18,30 @@
         justify-content: center;
         height: 100vh;
         overflow: hidden;
+        position: relative;
     }
 
-    /* FIXED background — no weird text, clean matrix image */
-    .bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: url("https://i.imgur.com/ho8a8nU.jpeg");
-        opacity: 0.22;
-        background-size: cover;
-        background-position: center;
-        z-index: -1;
-        animation: fade 6s infinite alternate;
-    }
-
-    @keyframes fade {
-        from { opacity: 0.15; }
-        to { opacity: 0.27; }
-    }
-
-    /* TOP RIGHT SMALL ICON SHORTCUTS */
+    /* TOP-RIGHT TEXT SHORTCUTS */
     .top-right {
         position: absolute;
         top: 18px;
-        right: 22px;
+        right: 25px;
         display: flex;
-        gap: 18px;
-        z-index: 10;
+        gap: 22px;
+        font-size: 16px;
+        z-index: 20;
     }
 
-    .icon {
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-        filter: drop-shadow(0 0 4px #00ff62);
+    .top-right a {
+        color: #00ff62;
+        text-decoration: none;
+        font-weight: bold;
         transition: 0.2s;
     }
 
-    .icon:hover {
-        transform: scale(1.15);
-        filter: drop-shadow(0 0 8px #00ff62);
+    .top-right a:hover {
+        text-shadow: 0 0 10px #00ff62;
+        transform: scale(1.1);
     }
 
     /* Logo */
@@ -141,17 +122,10 @@
 </head>
 <body>
 
-<div class="bg"></div>
-
-<!-- TOP RIGHT ICONS -->
+<!-- TOP RIGHT TEXT LINKS -->
 <div class="top-right">
-    <a href="https://mail.google.com" target="_blank">
-        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
-    </a>
-
-    <a href="https://photos.google.com" target="_blank">
-        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
-    </a>
+    <a href="https://mail.google.com" target="_blank">Gmail</a>
+    <a href="https://photos.google.com" target="_blank">Photos</a>
 </div>
 
 <!-- Logo -->
