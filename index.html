@@ -20,23 +20,47 @@
         overflow: hidden;
     }
 
-    /* Background Hacker Matrix Lines */
+    /* FIXED background — no weird text, clean matrix image */
     .bg {
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         width: 100%;
-        background: url("https://i.imgur.com/zx6Xr6h.jpeg"); 
-        opacity: 0.18;
+        background: url("https://i.imgur.com/ho8a8nU.jpeg");
+        opacity: 0.22;
         background-size: cover;
+        background-position: center;
         z-index: -1;
         animation: fade 6s infinite alternate;
     }
 
     @keyframes fade {
-        from { opacity: 0.12; }
-        to { opacity: 0.23; }
+        from { opacity: 0.15; }
+        to { opacity: 0.27; }
+    }
+
+    /* TOP RIGHT SMALL ICON SHORTCUTS */
+    .top-right {
+        position: absolute;
+        top: 18px;
+        right: 22px;
+        display: flex;
+        gap: 18px;
+        z-index: 10;
+    }
+
+    .icon {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        filter: drop-shadow(0 0 4px #00ff62);
+        transition: 0.2s;
+    }
+
+    .icon:hover {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 8px #00ff62);
     }
 
     /* Logo */
@@ -44,9 +68,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
         margin-bottom: 40px;
-        user-select: none;
         color: #00ff62;
         text-shadow: 0 0 15px #00ff62, 0 0 35px #00ff62;
         gap: 10px;
@@ -54,7 +76,6 @@
 
     .logo span:first-child {
         font-size: 60px;
-        margin-right: 10px;
         font-weight: bold;
     }
 
@@ -75,9 +96,10 @@
         outline: none;
         color: #d4ffd4;
         font-size: 18px;
-        transition: .3s ease;
         box-shadow: 0 0 15px rgba(0, 255, 100, 0.25);
+        transition: .3s ease;
     }
+
     .search-box:focus {
         border-color: #00ff62;
         box-shadow: 0 0 25px rgba(0, 255, 100, 0.45);
@@ -105,8 +127,8 @@
     .shortcuts a:hover {
         background: #00ff62;
         color: #000;
-        box-shadow: 0 0 25px #00ff62;
         transform: translateY(-3px);
+        box-shadow: 0 0 25px #00ff62;
     }
 
     .small-text {
@@ -121,24 +143,29 @@
 
 <div class="bg"></div>
 
-<!-- Custom Logo FIXED -->
+<!-- TOP RIGHT ICONS -->
+<div class="top-right">
+    <a href="https://mail.google.com" target="_blank">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/732/732200.png">
+    </a>
+
+    <a href="https://photos.google.com" target="_blank">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
+    </a>
+</div>
+
+<!-- Logo -->
 <div class="logo">
     <span>&lt;/&gt;</span>
     <span>Armughan.git</span>
 </div>
 
-<!-- Search Form -->
+<!-- Search -->
 <form action="https://www.google.com/search" method="GET">
-    <input 
-        class="search-box" 
-        type="text" 
-        name="q" 
-        placeholder="Search the internet..." 
-        autocomplete="off"
-    />
+    <input class="search-box" type="text" name="q" placeholder="Search the internet..." autocomplete="off" />
 </form>
 
-<!-- Shortcuts -->
+<!-- Buttons -->
 <div class="shortcuts">
     <a href="https://youtube.com" target="_blank">YouTube</a>
     <a href="https://instagram.com/khanarmughan.git" target="_blank">Instagram</a>
@@ -150,4 +177,3 @@
 
 </body>
 </html>
-
