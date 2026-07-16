@@ -1,231 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Tab</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background: radial-gradient(circle at center, #032218 0%, #010a07 100%);
-        font-family: "Consolas", "Courier New", monospace;
-        color: #d4ffd4;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-      }
+<title>New Tab</title>
 
-      /* TOP-RIGHT TEXT SHORTCUTS */
-      .top-right {
-        position: absolute;
-        top: 16px;
-        right: 25px;
-        display: flex;
-        gap: 20px;
-        font-size: 16px;
-        z-index: 20;
-      }
+<style>
 
-      .top-right a {
-        color: #00ff62;
-        text-decoration: none;
-        font-weight: bold;
-        position: relative;
-        padding-bottom: 2px; /* gap between text & underline */
-      }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-      .top-right a:hover::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0; /* underline stays below text */
-        width: 100%;
-        height: 1px; /* underline thickness */
-        background: #00ff62;
-        box-shadow: 0 0 8px #00ff62; /* neon glow */
-        transition: all 0.3s ease-in-out;
-      }
+body{
 
-      /* TOP LEFT CAPSULE BUTTON */
-      .top-left {
-        position: absolute;
-        top: 18px;
-        left: 22px;
-        z-index: 10;
-      }
+    font-family:"Consolas","Courier New",monospace;
 
-      .top-left a {
-        display: flex;
-        align-items: center;
-        gap: 22px;
+    height:100vh;
 
-        background: #0b1f16;
-        border: 1px solid #113523;
-        border-radius: 55px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 
-        padding: 6px 40px 6px 10px; /* wider capsule */
-        color: #00ff62;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 17px; /* slightly larger text */
+    overflow:hidden;
 
-        box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
-        transition: 0.25s ease;
-      }
+    color:#d8ffd8;
 
-      .top-left a:hover {
-        background: #00ff62;
-        color: #000;
-        box-shadow: 0 0 25px #00ff62;
-        transform: translateY(-2px);
-      }
+    background:
+    radial-gradient(circle at center,#4d0000 0%,#220000 25%,#080808 65%,#000000 100%);
 
-      .top-left img {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        object-fit: cover;  /* ensures perfect cropping */
-        object-position: center;
-      }
+    position:relative;
+}
 
+/* Cinematic Red Overlay */
 
-      /* Logo */
-      .logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #00ff62;
-        text-shadow: 0 0 04px #00ff62, 0 0 35px #00ff62;
-        gap: 20px;
-      }
+body::before{
 
-      .logo span:first-child {
-        font-size: 70px;
-        font-weight: bold;
-      }
+    content:"";
 
-      .logo span:last-child {
-        font-size: 60px;
-        font-weight: bold;
-      }
+    position:absolute;
+    inset:0;
 
-      /* Search bar */
-      .search-box {
-        margin-top: 50px;
-        width: 680px;
-        max-width: 95%;
-        padding: 18px 30px;
-        border-radius: 40px;
-        border: 2px solid #0f3321;
-        background: #0b1f16;
-        outline: none;
-        color: #d4ffd4;
-        font-size: 20px;
-        box-shadow: 0 0 18px rgba(0, 255, 100, 0.28);
-        transition: 0.3s ease;
-      }
+    background:
+    radial-gradient(circle at center,
+    rgba(255,0,0,.12),
+    transparent 70%);
 
-    .search-box:focus {
-      border-color: #00ff62;
-      box-shadow: 0 0 28px rgba(0, 255, 100, 0.5);
-     }
+    pointer-events:none;
 
+}
 
-      /* Shortcuts */
-      .shortcuts {
-        display: flex;
-        gap: 22px;
-        margin-top: 35px;
-      }
+/* Dark Vignette */
 
-      .shortcuts a {
-        text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 10px;
-        background: #0b1f16;
-        border: 1px solid #113523;
-        color: #00ff62;
-        font-size: 16px;
-        box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
-        transition: 0.3s;
-      }
+body::after{
 
-      .shortcuts a:hover {
-        background: #00ff62;
-        color: #000;
-        transform: translateY(-3px);
-        box-shadow: 0 0 25px #00ff62;
-      }
+    content:"";
 
-      .small-text {
-        margin-top: 20px;
-        opacity: 0.45;
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- TOP RIGHT TEXT LINKS -->
-    <div class="top-right">
-      <a href="https://mail.google.com" target="_blank">Gmail</a>
-      <a href="https://photos.google.com" target="_blank">Photos</a>
-    </div>
+    position:absolute;
+    inset:0;
 
-    <div class="top-left">
-      <a href="https://armughankhan.pythonanywhere.com/" target="_blank">
-        <img src="images/portfolio.png" alt="Portfolio">
-        <span>Portfolio</span>
-      </a>
-    </div>
+    background:
+    radial-gradient(circle,
+    transparent 45%,
+    rgba(0,0,0,.65) 100%);
 
-    <!-- Logo -->
-    <div class="logo">
-      <span>&lt;/&gt;</span>
-      <span>khanarmughan.git</span>
-    </div>
+    pointer-events:none;
 
-    <!-- Search -->
-    <form action="https://www.google.com/search" method="GET">
-      <input
-        class="search-box"
-        type="text"
-        name="q"
-        placeholder="Search the internet..."
-        autocomplete="off"
-      />
-    </form>
+}
 
-    <!-- Buttons -->
-    <div class="shortcuts">
-      <a href="https://youtube.com" target="_blank">YouTube</a>
-      <a href="https://instagram.com/khanarmughan.git" target="_blank"
-        >Instagram</a
-      >
-      <a href="https://github.com/khanarmughan71-dev" target="_blank">GitHub</a>
-      <a href="https://salesnest-frontend.vercel.app/" target="_blank"
-        >SalesNest</a
-      >
-    </div>
+/* ======================================
+TOP RIGHT
+====================================== */
 
-    <div class="small-text">@khanarmughan.git - all rights reserved</div>
-  </body>
+.top-right{
+
+    position:absolute;
+
+    top:18px;
+    right:28px;
+
+    display:flex;
+    gap:25px;
+
+    z-index:20;
+
+}
+
+.top-right a{
+
+    color:#00ff62;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    transition:.25s;
+
+}
+
+.top-right a:hover{
+
+    color:#fff;
+
+    text-shadow:
+
+    0 0 10px #00ff62,
+    0 0 20px #00ff62;
+
+}
+
+/* ======================================
+PORTFOLIO BUTTON
+====================================== */
+
+.top-left{
+
+    position:absolute;
+
+    top:18px;
+    left:24px;
+
+    z-index:20;
+
+}
+
+.top-left a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    text-decoration:none;
+
+    color:#00ff62;
+
+    background:rgba(15,15,15,.45);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(0,255,100,.15);
+
+    border-radius:60px;
+
+    padding:8px 30px 8px 10px;
+
+    box-shadow:
+
+    0 0 30px rgba(255,0,0,.18);
+
+    transition:.3s;
+
+}
+
+.top-left a:hover{
+
+    transform:translateY(-3px);
+
+    border-color:#00ff62;
+
+    box-shadow:
+
+    0 0 18px rgba(0,255,90,.35),
+    0 0 40px rgba(255,0,0,.25);
+
+}
+
+.top-left img{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+/* ======================================
+LOGO
+====================================== */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:55px;
+
+    color:#00ff62;
+
+    text-shadow:
+
+    0 0 8px #00ff62,
+    0 0 20px #00ff62,
+    0 0 45px rgba(0,255,80,.4);
+
+}
+
+.logo span:first-child{
+
+    font-size:70px;
+    font-weight:bold;
+
+}
+
+.logo span:last-child{
+
+    font-size:60px;
+    font-weight:bold;
+    letter-spacing:2px;
+
+}
+
+/* ======================================
+SEARCH BAR
+====================================== */
+
+.search-box{
+
+    width:720px;
+
+    max-width:95%;
+
+    padding:22px 34px;
+
+    font-size:20px;
+
+    color:white;
+
+    border-radius:60px;
+
+    border:1px solid rgba(0,255,90,.18);
+
+    outline:none;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    rgba(255,0,0,.10),
+    rgba(20,20,20,.55));
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+
+    0 0 18px rgba(255,0,0,.15),
+    inset 0 0 15px rgba(255,255,255,.03);
+
+    transition:.3s;
+
+}
+
+.search-box::placeholder{
+
+    color:#a0e5b4;
+
+}
+
+.search-box:focus{
+
+    border-color:#00ff62;
+
+    box-shadow:
+
+    0 0 25px rgba(255,0,0,.25),
+    0 0 35px rgba(0,255,90,.28);
+
+}
+
+/* ======================================
+SHORTCUT BUTTONS
+====================================== */
+
+.shortcuts{
+
+    display:flex;
+
+    gap:18px;
+
+    margin-top:40px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+.shortcuts a{
+
+    text-decoration:none;
+
+    color:#00ff62;
+
+    padding:13px 24px;
+
+    border-radius:14px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    rgba(22,22,22,.75),
+    rgba(10,10,10,.95));
+
+    border:1px solid rgba(0,255,90,.12);
+
+    box-shadow:
+
+    0 0 18px rgba(255,0,0,.12);
+
+    transition:.25s;
+
+}
+
+.shortcuts a:hover{
+
+    color:white;
+
+    border-color:#00ff62;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    rgba(0,255,80,.10),
+    rgba(25,25,25,.95));
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+    0 0 18px rgba(0,255,90,.35),
+    0 0 35px rgba(255,0,0,.22);
+
+}
+
+/* ======================================
+FOOTER
+====================================== */
+
+.small-text{
+
+    margin-top:30px;
+
+    opacity:.45;
+
+    color:#9cffb6;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOP RIGHT -->
+
+<div class="top-right">
+
+<a href="https://mail.google.com" target="_blank">Gmail</a>
+
+<a href="https://photos.google.com" target="_blank">Photos</a>
+
+</div>
+
+<!-- PORTFOLIO -->
+
+<div class="top-left">
+
+<a href="https://armughankhan.pythonanywhere.com/" target="_blank">
+
+<img src="images/portfolio.png" alt="Portfolio">
+
+<span>Portfolio</span>
+
+</a>
+
+</div>
+
+<!-- LOGO -->
+
+<div class="logo">
+
+<span>&lt;/&gt;</span>
+
+<span>khanarmughan.git</span>
+
+</div>
+
+<!-- SEARCH -->
+
+<form action="https://www.google.com/search" method="GET">
+
+<input
+
+class="search-box"
+
+type="text"
+
+name="q"
+
+placeholder="Search the internet..."
+
+autocomplete="off"
+
+/>
+
+</form>
+
+  <!-- SHORTCUTS -->
+
+<div class="shortcuts">
+
+    <a href="https://youtube.com" target="_blank">YouTube</a>
+
+    <a href="https://instagram.com/khanarmughan.git" target="_blank">
+        Instagram
+    </a>
+
+    <a href="https://github.com/khanarmughan71-dev" target="_blank">
+        GitHub
+    </a>
+
+    <a href="https://salesnest-frontend.vercel.app/" target="_blank">
+        SalesNest
+    </a>
+
+</div>
+
+<div class="small-text">
+
+    @khanarmughan.git • Crafted with Passion
+
+</div>
+
+<!-- CENTER AMBIENT GLOW -->
+
+<div class="ambient-red"></div>
+<div class="ambient-green"></div>
+
+<style>
+
+/* ===============================
+CENTER RED AMBIENT GLOW
+=============================== */
+
+.ambient-red{
+
+    position:absolute;
+
+    width:900px;
+    height:900px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,0,0,.16),
+    transparent 72%);
+
+    filter:blur(120px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+}
+.ambient-green{
+
+    position:absolute;
+
+    width:550px;
+    height:550px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(0,255,90,.08),
+    transparent 72%);
+
+    filter:blur(100px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+}
+
+@media (max-width:900px){
+
+.logo{
+
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:35px;
+
+}
+
+.logo span:first-child{
+
+    font-size:56px;
+
+}
+
+.logo span:last-child{
+
+    font-size:42px;
+    text-align:center;
+
+}
+
+.search-box{
+
+    width:92%;
+    font-size:18px;
+    padding:18px 24px;
+
+}
+
+.shortcuts{
+
+    width:92%;
+    gap:12px;
+
+}
+
+.shortcuts a{
+
+    flex:1 1 calc(50% - 12px);
+    text-align:center;
+
+}
+
+.top-right{
+
+    right:16px;
+    gap:14px;
+    font-size:14px;
+
+}
+
+.top-left{
+
+    left:16px;
+
+}
+
+.top-left a{
+
+    padding:6px 18px 6px 8px;
+
+}
+
+}
+
+@media (max-width:560px){
+
+.shortcuts a{
+
+    flex:1 1 100%;
+
+}
+
+.logo span:first-child{
+
+    font-size:48px;
+
+}
+
+.logo span:last-child{
+
+    font-size:34px;
+
+}
+
+.small-text{
+
+    text-align:center;
+    padding:0 20px;
+
+}
+}
+</style>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
