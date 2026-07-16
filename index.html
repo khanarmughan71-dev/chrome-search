@@ -406,22 +406,14 @@ FOOTER
 
 <!-- SEARCH -->
 
-<form action="https://www.google.com/search" method="GET">
-
-<input
-
-class="search-box"
-
-type="text"
-
-name="q"
-
-placeholder="Search the internet..."
-
-autocomplete="off"
-
-/>
-
+<form id="searchForm">
+  <input
+    id="searchInput"
+    class="search-box"
+    type="text"
+    placeholder="Search the internet..."
+    autocomplete="off"
+  />
 </form>
 
   <!-- SHORTCUTS -->
@@ -599,5 +591,17 @@ CENTER RED AMBIENT GLOW
 }
 }
 </style>
+
+    <script>
+document.getElementById("searchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const query = document.getElementById("searchInput").value.trim();
+
+    if (query) {
+        window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query);
+    }
+});
+</script>
 </body>
 </html>
