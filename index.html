@@ -421,18 +421,94 @@
       .result {
         display: none;
         margin: 15px auto 0;
-        max-width: 850px;
-        height: 300px;
+        width: min(100%, 850px);
+        max-height: 330px;
+        overflow-y: auto;
+        padding: 18px 20px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        overflow: hidden;
+        background: rgba(0, 12, 7, 0.96);
+        box-shadow: 0 0 22px rgba(0, 255, 102, 0.12);
+        text-align: left;
       }
-      .result iframe { width: 100%; height: 100%; border: 0; background: #fff; }
 
-      .hint {
+      .result-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+        color: var(--g);
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .result-status {
         color: var(--dim);
-        font-size: 9px;
-        letter-spacing: 1px;
+        font-size: 10px;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .result-card {
+        padding: 12px 0;
+        border-top: 1px solid rgba(0, 255, 102, 0.14);
+      }
+
+      .result-card:first-child {
+        border-top: 0;
+      }
+
+      .result-card a {
+        color: var(--g);
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .result-card a:hover {
+        text-shadow: 0 0 10px rgba(0, 255, 102, 0.7);
+      }
+
+      .result-card p {
+        margin: 7px 0 0;
+        color: var(--soft);
+        font-size: 11px;
+        line-height: 1.7;
+      }
+
+      .result-card small {
+        display: block;
+        margin-top: 6px;
+        color: var(--dim);
+        font-size: 10px;
+        word-break: break-word;
+      }
+
+      .result-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .result-actions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 32px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--g);
+        font-size: 10px;
+        text-decoration: none;
+      }
+
+      .result-actions a:hover {
+        border-color: var(--g);
+        background: rgba(0, 255, 102, 0.08);
       }
 
       /* BOTTOM PANELS */
@@ -633,7 +709,16 @@
         <div class="wave"></div>
 
         <div class="result" id="result">
-          <iframe id="frame"></iframe>
+          <div class="result-heading">
+            <span>SEARCH RESULTS</span>
+            <span class="result-status" id="resultStatus">Loading...</span>
+          </div>
+          <div id="resultCards"></div>
+          <div class="result-actions">
+            <a id="googleResultLink" href="#" target="_blank" rel="noopener">OPEN GOOGLE ↗</a>
+            <a id="bingResultLink" href="#" target="_blank" rel="noopener">OPEN BING ↗</a>
+            <a id="duckResultLink" href="#" target="_blank" rel="noopener">OPEN DUCKDUCKGO ↗</a>
+          </div>
         </div>
 
         <div class="hint">TIP: TYPE A WEBSITE URL OR SEARCH ANYTHING</div>
@@ -714,8 +799,6 @@
     <script>
       const q = document.getElementById('q');
       const form = document.getElementById('form');
-      const frame = document.getElementById('frame');
-      const result = document.getElementById('result');
       const engineBtns = document.querySelectorAll('.engine-btn');
       let currentEngine = "https://www.google.com/search?q=";
 
@@ -736,9 +819,12 @@
         let url = /^(https?:\/\/|www\.)/i.test(v) 
           ? (v.startsWith('http') ? v : 'https://' + v) 
           : currentEngine + encodeURIComponent(v);
-        frame.src = url;
-        result.style.display = 'block';
-        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        const googleUrl = 'https://www.google.com/search?q=' + encodeURIComponent(v);
+
+        // Open the typed keyword directly in Google in the same tab.
+        // No iframe or alternate search-result panel is used because Google
+        // blocks embedded search pages.
+        window.location.href = googleUrl;
       });
 
       // Clock Logic
